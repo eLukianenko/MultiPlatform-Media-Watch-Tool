@@ -1,5 +1,5 @@
 <template>
-  <div id="twitch-embed"></div>
+  <div id="twitch-embed" class="channel"></div>
 </template>
 <script>
 export default {
@@ -11,7 +11,7 @@ export default {
           height: this.height,
           channel: this.channel,
           layout: 'video',
-          autoplay: false
+          muted: true,
       })
     }
 }
