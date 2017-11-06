@@ -4,14 +4,16 @@
 <script>
 export default {
     name: 'TwitchStream',
-    props: ['channel', 'width', 'height'],
+    props: ['channel', 'width', 'height', 'autoplay', 'muted','theme', 'chat'],
     mounted () {
       new Twitch.Embed('twitch-embed', {
+          channel: this.channel,
           width: this.width,
           height: this.height,
-          channel: this.channel,
-          layout: 'video',
-          muted: true,
+          autoplay: this.autoplay,
+          muted: this.muted,
+          theme: this.theme,
+          layout: this.chat? 'video-and-chat':'video'
       })
     }
 }
