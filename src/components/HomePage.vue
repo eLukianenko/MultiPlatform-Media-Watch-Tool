@@ -1,15 +1,15 @@
-<style>
-  .toolbar{
-
-  }
-</style>
 <template>
   <div>
-    <toolbar class="toolbar"></toolbar>
+    <transition name="slide-fade">
+      <toolbar class="toolbar" v-show="showToolbar"></toolbar>
+    </transition>
     <div v-if="showHello">
       <img src="../assets/YouTubeTwitch.jpg" width="500px" height="300px">
       <h1>Welcome to Multiplatform stream view service!</h1>
-      <h2>Please add stream url in toolbar and enjoy!</h2>
+      <h2>Please add stream urls in toolbar and enjoy!</h2>
+      <button @click="showToolbar = !showToolbar" class="btn btn-danger">
+        ADD STREAMS
+      </button>
     </div>
     <div v-for="stream in streamsArray">
       <twitch v-if="stream.platform =='twitch'"
@@ -18,7 +18,6 @@
               :height="streamHeight"
               :autoplay="settings.autoplay"
               :muted="settings.muted"
-              :theme="settings.theme"
               :chat="settings.chat"
       ></twitch>
       <youtube v-if="stream.platform =='youtube'"
@@ -48,7 +47,8 @@ export default {
             heightDefault: 480,
             streamsArray: [],
             settings:[],
-            showHello: true
+            showHello: true,
+            showToolbar: false
         }
     },
     computed: {
@@ -74,3 +74,20 @@ export default {
     }
 }
 </script>
+<style>
+  .toolbar{
+    width: 300px;
+    background-color: beige;
+    position: absolute;
+  }
+  .slide-fade-enter-active {
+    transition: all .3s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter, .slide-fade-leave-to{
+    transform: translateX(10px);
+    opacity: 0;
+  }
+</style>
