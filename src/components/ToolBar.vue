@@ -5,7 +5,8 @@
       <div class="input-group control-group after-add-more">
         <input type="url" class="form-control" placeholder="Stream url" v-model="streamsArray">
         <div class="input-group-btn">
-          <button class="btn btn-success add-more" type="button">ADD</button>
+          <button class="btn btn-success add-more" type="button" v-if="addClicked==false">ADD</button>
+          <button class="btn btn-danger remove" type="button" v-if="addClicked">REMOVE</button>
         </div>
       </div>
 
@@ -13,7 +14,7 @@
         <div class="input-group control-group">
           <input type="url" class="form-control" placeholder="Stream url" v-model="streamsArray">
           <div class="input-group-btn">
-            <button class="btn btn-danger remove" type="button">REMOVE></button>
+            <button class="btn btn-success add-more" type="button">ADD</button>
           </div>
         </div>
       </div>
@@ -41,7 +42,8 @@ export default {
     name: 'ToolBar',
     data() {
         return {
-            streamsArray: []
+            streamsArray: [],
+            addClicked: false
         }
     },
     computed: {
@@ -51,6 +53,7 @@ export default {
         $(".add-more").click(function(){
             let html = $(".copy").html();
             $(".after-add-more").after(html);
+            this.addClicked = true;
         });
 
         $("body").on("click",".remove", function(){
