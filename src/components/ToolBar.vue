@@ -3,17 +3,17 @@
     <form>
       <H4>Stream urls</H4>
       <div class="input-group control-group after-add-more">
-        <input type="url" class="form-control" placeholder="Stream url" v-model="streamsArray[1]">
+        <input type="url" class="form-control" placeholder="Stream url" v-model="streamsArray">
         <div class="input-group-btn">
-          <button class="btn btn-success add-more" type="button"><i class="glyphicon glyphicon-plus"></i>ADD</button>
+          <button class="btn btn-success add-more" type="button">ADD</button>
         </div>
       </div>
 
       <div class="copy" v-show="false">
         <div class="input-group control-group">
-          <input type="url" class="form-control" placeholder="Stream url" v-model="streamsArray[2]">
+          <input type="url" class="form-control" placeholder="Stream url" v-model="streamsArray">
           <div class="input-group-btn">
-            <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i>Remove</button>
+            <button class="btn btn-danger remove" type="button">REMOVE></button>
           </div>
         </div>
       </div>
@@ -34,7 +34,6 @@
       </div>
       <button type="submit" class="btn btn-primary" @click="sendData">SHOW</button>
     </form>
-<!-- button of adding new field -->
   </div>
 </template>
 <script>
