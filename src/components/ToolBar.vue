@@ -5,17 +5,8 @@
       <div class="input-group control-group after-add-more">
         <input type="url" class="form-control" placeholder="Stream url" v-model="streamsArray">
         <div class="input-group-btn">
-          <button class="btn btn-success add-more" type="button" v-if="addClicked==false">ADD</button>
-          <button class="btn btn-danger remove" type="button" v-if="addClicked">REMOVE</button>
-        </div>
-      </div>
-
-      <div class="copy" v-show="false">
-        <div class="input-group control-group">
-          <input type="url" class="form-control" placeholder="Stream url" v-model="streamsArray">
-          <div class="input-group-btn">
-            <button class="btn btn-success add-more" type="button">ADD</button>
-          </div>
+          <button class="btn btn-success add-more" type="button" v-if="!addClicked" @click="addField"><span class="glyphicon glyphicon-plus"></span></button>
+          <button class="btn btn-danger remove" type="button" v-if="addClicked" @click="removeField"><span class="glyphicon glyphicon-minus"></span></button>
         </div>
       </div>
 
@@ -47,19 +38,17 @@ export default {
         }
     },
     mounted(){
-        $(".add-more").click(function(){
-            let html = $(".copy").html();
-            $(".after-add-more").after(html);
-            this.addClicked = true;
-        });
-
-        $("body").on("click",".remove", function(){
-            $(this).parents(".control-group").remove();
-        });
     },
     methods: {
         sendData() {
             console.log(this.streamsArray);
+        },
+        addField() {
+            this.addClicked = true;
+//            let html = $(".copy").html();
+//            $(".after-add-more").after(html);
+        },
+        removeField() {
         }
     }
 }
@@ -74,6 +63,9 @@ export default {
     margin-top: 5%;
     text-align: left;
     margin-left: 5%;
+  }
+  form{
+    margin: 2%;
   }
 </style>
 
