@@ -4,9 +4,9 @@
       <toolbar class="toolbar" v-show="showToolbar"></toolbar>
     </transition>
     <div v-if="showHello">
-      <img src="../assets/YouTubeTwitch.jpg" width="500px" height="300px">
-      <h1>Welcome to Multiplatform stream view service!</h1>
-      <h2>Please add stream urls in toolbar and enjoy!</h2>
+      <img src="../assets/YouTubeTwitch.jpg" width="450px" height="300px">
+      <h2>Welcome to Multiplatform stream view service!</h2>
+      <h4>Please add stream urls in toolbar and enjoy!</h4>
       <button @click="showToolbar = !showToolbar" class="btn btn-danger">
         ADD STREAMS
       </button>
