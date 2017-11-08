@@ -46,9 +46,6 @@ export default {
             addClicked: false
         }
     },
-    computed: {
-
-    },
     mounted(){
         $(".add-more").click(function(){
             let html = $(".copy").html();
