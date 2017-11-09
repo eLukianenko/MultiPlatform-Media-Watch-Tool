@@ -1,5 +1,5 @@
 <template>
-  <div id="twitch-embed" class="channel"></div>
+  <div id="twitch-embed"></div>
 </template>
 <script>
 export default {
