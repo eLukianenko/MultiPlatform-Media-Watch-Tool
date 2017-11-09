@@ -13,15 +13,15 @@
       <button class="btn btn-success add-more" type="button" @click="addField"><span class="glyphicon glyphicon-plus"></span></button>
       <div class="form-check">
         <label class="form-check-label">
-          <input type="checkbox" class="form-check-input">
+          <input type="checkbox" class="form-check-input" v-model="settingsArray" value="autoplay">
           Enable stream autoplay(Twitch)
         </label>
         <label class="form-check-label">
-          <input type="checkbox" class="form-check-input">
+          <input type="checkbox" class="form-check-input" v-model="settingsArray" value="chat">
           Enable stream chat(Twitch)
         </label>
         <label class="form-check-label">
-          <input type="checkbox" class="form-check-input">
+          <input type="checkbox" class="form-check-input" v-model="settingsArray" value="mute">
           Mute stream(Twitch)
         </label>
       </div>
@@ -35,7 +35,8 @@ export default {
     data() {
         return {
             inputStreamsArray: [],
-            streamsArray: []
+            streamsArray: [],
+            settingsArray:[]
         }
     },
     mounted(){
@@ -48,20 +49,20 @@ export default {
             let vm = this;
             this.streamsArray = [];
             this.inputStreamsArray.forEach(function(item){
-                let value = '';
+                let url = '';
                 let platform = '';
                 if(item.value.indexOf("youtube.com")+1) {
-                    value = item.value.substr(item.value.lastIndexOf("=")+1);
+                    url = item.value.substr(item.value.lastIndexOf("=")+1);
                     platform = "youtube";
                 }
                 if(item.value.indexOf("twitch.tv")+1) {
-                    value = item.value.substr(item.value.lastIndexOf("/")+1);
+                    url = item.value.substr(item.value.lastIndexOf("/")+1);
                     platform = "twitch";
                 }
 
-                vm.streamsArray.push({value: value, platform: platform});
+                vm.streamsArray.push({url: url, platform: platform});
             });
-            this.$emit('sendStreamData', { data: this.streamsArray })
+            this.$emit('setStreamData', { streams: this.streamsArray, settings: this.settingsArray })
         },
         addField() {
             this.inputStreamsArray.push({ value: '' });

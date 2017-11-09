@@ -2,8 +2,7 @@
     <iframe :width="width"
             :height="height"
             :src="streamSRC"
-            frameborder="0"
-            allowfullscreen></iframe>
+    ></iframe>
 </template>
 <script>
 export default {
@@ -19,9 +18,5 @@ export default {
 <style scoped="">
   iframe {
     float:right;
-  }
-
-  .clear {
-    clear:both;
   }
 </style>
