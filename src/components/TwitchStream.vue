@@ -1,6 +1,7 @@
 <template>
   <div id="twitch-embed"></div>
 </template>
+
 <script>
 export default {
     name: 'TwitchStream',

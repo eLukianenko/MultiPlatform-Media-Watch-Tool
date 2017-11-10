@@ -4,6 +4,7 @@
             :src="streamSRC"
     ></iframe>
 </template>
+
 <script>
 export default {
     name: 'TwitchStream',
@@ -15,7 +16,8 @@ export default {
     }
 }
 </script>
-<style scoped="">
+
+<style scoped>
   iframe {
     float:right;
   }

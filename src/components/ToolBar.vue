@@ -1,7 +1,7 @@
 <template>
   <div>
     <form>
-      <H4>Stream urls</H4>
+      <H4>Streams</H4>
       <div v-for="stream in inputStreamsArray">
         <div class="input-group control-group">
           <input type="url" class="form-control" placeholder="Stream url" v-model="stream.value">
@@ -10,7 +10,9 @@
           </div>
         </div>
       </div>
+
       <button class="btn btn-success add-more" type="button" @click="addField"><span class="glyphicon glyphicon-plus"></span></button>
+
       <div class="form-check">
         <label class="form-check-label">
           <input type="checkbox" class="form-check-input" v-model="settingsArray" value="autoplay">
@@ -29,6 +31,7 @@
     </form>
   </div>
 </template>
+
 <script>
 export default {
     name: 'ToolBar',
@@ -39,12 +42,15 @@ export default {
             settingsArray:[]
         }
     },
-    mounted(){
+    mounted() {
         $("body").on("click",".remove", function(){
             $(this).parents(".control-group").remove();
         });
     },
     methods: {
+        /**
+         * Send data to home page with streams
+         */
         sendData() {
             let vm = this;
             this.streamsArray = [];
@@ -64,6 +70,9 @@ export default {
             });
             this.$emit('setStreamData', { streams: this.streamsArray, settings: this.settingsArray })
         },
+        /**
+         * Add new input field to form
+         */
         addField() {
             this.inputStreamsArray.push({ value: '' });
         }
@@ -77,9 +86,9 @@ export default {
     margin-top: 5%;
   }
   .form-check {
+    margin-left: 5%;
     margin-top: 5%;
     text-align: left;
-    margin-left: 5%;
   }
   form{
     margin: 2%;
