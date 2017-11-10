@@ -121,7 +121,7 @@
 
 <style>
     .toolbar {
-        width: 300px;
+        width: 400px;
         background-color: lightblue;
         top: 4.5%;
         text-align: center;
@@ -130,7 +130,7 @@
     .add-streams {
         position: absolute;
         top: 1%;
-        left: 2%;
+        left: 9%;
     }
 
     img {

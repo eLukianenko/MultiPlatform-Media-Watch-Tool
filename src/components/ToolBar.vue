@@ -1,100 +1,107 @@
 <template>
-  <div>
-    <form>
-      <H4>Streams</H4>
-      <div v-for="stream in inputStreamsArray">
-        <div class="input-group control-group">
-          <input type="url" class="form-control" placeholder="Stream url" v-model="stream.value">
-          <div class="input-group-btn">
-            <button class="btn btn-danger remove" type="button"><span class="glyphicon glyphicon-minus"></span></button>
-          </div>
-        </div>
-      </div>
+    <div>
+        <form>
+            <H4>Streams</H4>
+            <div v-for="stream in inputStreamsArray">
+                <div class="input-group control-group">
+                    <input type="url" class="form-control" placeholder="Stream url" v-model="stream.value">
+                    <div class="input-group-btn">
+                        <button class="btn btn-danger remove" type="button"><span
+                                class="glyphicon glyphicon-minus"></span></button>
+                    </div>
+                </div>
+            </div>
 
-      <button class="btn btn-success add-more" type="button" @click="addField"><span class="glyphicon glyphicon-plus"></span></button>
+            <button class="btn btn-success add-more" type="button" @click="addField"><span
+                    class="glyphicon glyphicon-plus"></span></button>
 
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" v-model="settingsArray" value="autoplay">
-          Enable stream autoplay(Twitch)
-        </label>
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" v-model="settingsArray" value="chat">
-          Enable stream chat(Twitch)
-        </label>
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" v-model="settingsArray" value="mute">
-          Mute stream(Twitch)
-        </label>
-      </div>
-      <button type="submit" class="btn btn-primary" @click="sendData">SHOW</button>
-    </form>
-  </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" v-model="settingsArray" value="autoplay">
+                    Enable stream autoplay(Twitch)
+                </label>
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" v-model="settingsArray" value="chat">
+                    Enable stream chat(Twitch)
+                </label>
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" v-model="settingsArray" value="mute">
+                    Mute stream(Twitch)
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary" @click="sendData">SHOW</button>
+        </form>
+    </div>
 </template>
 
 <script>
-export default {
-    name: 'ToolBar',
-    data() {
-        return {
-            inputStreamsArray: [],
-            streamsArray: [],
-            settingsArray:[]
-        }
-    },
-    mounted() {
-        $("body").on("click",".remove", function(){
-            $(this).parents(".control-group").remove();
-        });
-    },
-    methods: {
-        /**
-         * Send data to home page with streams
-         */
-        sendData() {
-            let vm = this;
-            this.streamsArray = [];
-            this.inputStreamsArray.forEach(function(item){
-                let url = '';
-                let platform = '';
-                if(item.value.indexOf("youtube.com")+1) {
-                    url = item.value.substr(item.value.lastIndexOf("=")+1);
-                    platform = "youtube";
-                }
-                if(item.value.indexOf("twitch.tv")+1) {
-                    url = item.value.substr(item.value.lastIndexOf("/")+1);
-                    platform = "twitch";
-                }
-
-                vm.streamsArray.push({url: url, platform: platform});
-            });
-            this.$emit('setStreamData', { streams: this.streamsArray, settings: this.settingsArray })
+    export default {
+        name: 'ToolBar',
+        data() {
+            return {
+                inputStreamsArray: [],
+                streamsArray: [],
+                settingsArray: []
+            }
         },
-        /**
-         * Add new input field to form
-         */
-        addField() {
-            this.inputStreamsArray.push({ value: '' });
+        mounted() {
+            $("body").on("click", ".remove", function () {
+                $(this).parents(".control-group").remove();
+            });
+        },
+        methods: {
+            /**
+             * Send data to home page with streams
+             */
+            sendData() {
+                let vm = this;
+                this.streamsArray = [];
+                this.inputStreamsArray.forEach(function (item) {
+                    let url = '';
+                    let platform = '';
+                    if (item.value.indexOf("youtube.com") + 1) {
+                        url = item.value.substr(item.value.lastIndexOf("=") + 1);
+                        platform = "youtube";
+                    }
+                    if (item.value.indexOf("twitch.tv") + 1) {
+                        url = item.value.substr(item.value.lastIndexOf("/") + 1);
+                        platform = "twitch";
+                    }
+
+                    vm.streamsArray.push({url: url, platform: platform});
+                });
+                this.$emit('setStreamData', {streams: this.streamsArray, settings: this.settingsArray})
+            },
+            /**
+             * Add new input field to form
+             */
+            addField() {
+                this.inputStreamsArray.push({value: ''});
+            }
         }
     }
-}
 </script>
+
 <style>
-  .input-group{
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 5%;
-  }
-  .form-check {
-    margin-left: 5%;
-    margin-top: 5%;
-    text-align: left;
-  }
-  form{
-    margin: 2%;
-  }
-  .add-more {
-    margin-top: 3%;
-  }
+    .input-group {
+        width: 90%;
+        margin-left: 5%;
+        margin-top: 5%;
+    }
+    .form-check {
+        margin-left: 5%;
+        margin-top: 5%;
+        text-align: left;
+    }
+    label {
+        font-weight: 500;
+        display: block;
+    }
+    form {
+        margin: 2%;
+    }
+    .add-more {
+        margin-top: 5%;
+    }
 </style>
 
