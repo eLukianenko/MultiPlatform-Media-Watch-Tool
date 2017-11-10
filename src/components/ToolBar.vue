@@ -1,19 +1,18 @@
 <template>
     <div>
         <form>
-            <H4>Streams</H4>
-            <div v-for="stream in inputStreamsArray">
+            <H4>Streams <button class="btn btn-success add-more" type="button" @click="addField"><span
+                    class="glyphicon glyphicon-plus"></span></button></H4>
+
+            <div v-for="(stream, index) in inputStreamsArray">
                 <div class="input-group control-group">
                     <input type="url" class="form-control" placeholder="Stream url" v-model="stream.value">
                     <div class="input-group-btn">
-                        <button class="btn btn-danger remove" type="button"><span
+                        <button class="btn btn-danger remove" type="button" @click="inputStreamsArray.splice(index, 1)"><span
                                 class="glyphicon glyphicon-minus"></span></button>
                     </div>
                 </div>
             </div>
-
-            <button class="btn btn-success add-more" type="button" @click="addField"><span
-                    class="glyphicon glyphicon-plus"></span></button>
 
             <div class="form-check">
                 <label class="form-check-label">
@@ -39,15 +38,10 @@
         name: 'ToolBar',
         data() {
             return {
-                inputStreamsArray: [],
+                inputStreamsArray: ['','','',''],
                 streamsArray: [],
                 settingsArray: []
             }
-        },
-        mounted() {
-            $("body").on("click", ".remove", function () {
-                $(this).parents(".control-group").remove();
-            });
         },
         methods: {
             /**
@@ -56,6 +50,7 @@
             sendData() {
                 let vm = this;
                 this.streamsArray = [];
+
                 this.inputStreamsArray.forEach(function (item) {
                     let url = '';
                     let platform = '';
@@ -99,9 +94,6 @@
     }
     form {
         margin: 2%;
-    }
-    .add-more {
-        margin-top: 5%;
     }
 </style>
 

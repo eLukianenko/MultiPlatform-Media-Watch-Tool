@@ -48,7 +48,6 @@
                 streamsArray: [],
                 settings: {},
                 showHello: true,
-                showToolbar: false
             }
         },
         computed: {
@@ -96,9 +95,8 @@
              * @returns {void}
              */
             setStreamArray(streamArray) {
-                this.showHello = false;
-                this.showToolbar = false;
                 this.cleanHomePage();
+                this.streamsArray = streamArray.streams;
 
                 for(let index in streamArray.settings) {
                     let key = streamArray.settings[index];
@@ -112,8 +110,10 @@
              * @returns {void}
              */
             cleanHomePage() {
+                this.showHello = false;
                 this.setDefaultSettings();
                 this.streamsArray = [];
+                $('[data-toggle="dropdown"]').parent().removeClass('open');
             }
         }
     }
@@ -130,7 +130,7 @@
     .add-streams {
         position: absolute;
         top: 1%;
-        left: 9%;
+        left: 8.5%;
     }
 
     img {
