@@ -6,7 +6,7 @@
 
             <div v-for="(stream, index) in inputStreamsArray">
                 <div class="input-group control-group">
-                    <input type="url" class="form-control" placeholder="Stream url" v-model="stream.value">
+                    <input type="url" class="form-control" placeholder="Stream url" v-model="stream.url">
                     <div class="input-group-btn">
                         <button class="btn btn-danger remove" type="button" @click="inputStreamsArray.splice(index, 1)"><span
                                 class="glyphicon glyphicon-minus"></span></button>
@@ -38,7 +38,20 @@
         name: 'ToolBar',
         data() {
             return {
-                inputStreamsArray: ['','','',''],
+                inputStreamsArray: [
+                    {
+                        url:''
+                    },
+                    {
+                        url:''
+                    },
+                    {
+                        url:''
+                    },
+                    {
+                        url:''
+                    }
+                    ],
                 streamsArray: [],
                 settingsArray: []
             }
@@ -54,12 +67,14 @@
                 this.inputStreamsArray.forEach(function (item) {
                     let url = '';
                     let platform = '';
-                    if (item.value.indexOf("youtube.com") + 1) {
-                        url = item.value.substr(item.value.lastIndexOf("=") + 1);
+                    let dataUrl = item.url;
+
+                    if (dataUrl.indexOf("youtube.com") + 1) {
+                        url = dataUrl.substr(dataUrl.lastIndexOf("=") + 1);
                         platform = "youtube";
                     }
-                    if (item.value.indexOf("twitch.tv") + 1) {
-                        url = item.value.substr(item.value.lastIndexOf("/") + 1);
+                    if (dataUrl.indexOf("twitch.tv") + 1) {
+                        url = dataUrl.substr(dataUrl.lastIndexOf("/") + 1);
                         platform = "twitch";
                     }
 

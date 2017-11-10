@@ -90,30 +90,31 @@
             },
 
             /**
-             * Set stream array with data from toolbar component
-             *
-             * @returns {void}
-             */
-            setStreamArray(streamArray) {
-                this.cleanHomePage();
-                this.streamsArray = streamArray.streams;
-
-                for(let index in streamArray.settings) {
-                    let key = streamArray.settings[index];
-                    this.settings[key] = true;
-                }
-            },
-
-            /**
              * Clean home page from streams and set default settings
              *
              * @returns {void}
              */
             cleanHomePage() {
                 this.showHello = false;
-                this.setDefaultSettings();
                 this.streamsArray = [];
+                this.setDefaultSettings();
                 $('[data-toggle="dropdown"]').parent().removeClass('open');
+            },
+
+            /**
+             * Set stream array with data from toolbar component
+             *
+             * @returns {void}
+             */
+            setStreamArray(streamArray) {
+                this.cleanHomePage();
+                this.$nextTick(function () {
+                    this.streamsArray = streamArray.streams;
+                });
+                for(let index in streamArray.settings) {
+                    let key = streamArray.settings[index];
+                    this.settings[key] = true;
+                }
             }
         }
     }
