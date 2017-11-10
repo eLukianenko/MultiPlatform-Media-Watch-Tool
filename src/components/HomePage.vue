@@ -1,15 +1,13 @@
 <template>
     <div>
-        <transition name="slide-fade">
-            <toolbar class="toolbar" v-show="showToolbar" @setStreamData="setStreamArray"></toolbar>
-        </transition>
+        <toolbar class="toolbar dropdown-menu" @setStreamData="setStreamArray"></toolbar>
         <div v-if="showHello">
             <img src="../assets/YouTubeTwitch.jpg">
             <h2>Welcome to Multiplatform stream view service!</h2>
-            <h4>Please add stream urls in toolbar and enjoy!</h4>
+            <h4>Please add stream urls in toolbar!</h4>
         </div>
-        <button @click="showToolbar = !showToolbar" class="btn btn-danger add-streams">
-            ADD STREAMS
+        <button class="btn btn-primary add-streams dropdown-toggle" data-toggle="dropdown">
+            ADD STREAMS <span class="caret"></span>
         </button>
         <div v-for="stream in streamsArray">
             <twitch v-if="stream.platform =='twitch'"
@@ -19,7 +17,6 @@
                     :autoplay="settings.autoplay"
                     :muted="settings.mute"
                     :chat="settings.chat"
-                    class="stream"
             ></twitch>
             <youtube v-if="stream.platform =='youtube'"
                      :channel="stream.url"
@@ -29,6 +26,7 @@
         </div>
     </div>
 </template>
+
 <script>
     import TwitchStream from './TwitchStream'
     import YoutubeStream from './YoutubeStream'
@@ -48,52 +46,85 @@
                 heightMin: 400,
                 heightDefault: 480,
                 streamsArray: [],
-                settings:
-                    {
-                        autoplay: false,
-                        mute: false,
-                        chat: false,
-                    },
+                settings: {},
                 showHello: true,
                 showToolbar: false
             }
         },
         computed: {
+            /**
+             * Stream width
+             *
+             * @returns {number}
+             */
             streamWidth() {
                 if (this.streamsArray.length > 4) {
 //counting logic
                 } else return this.widthDefault;
             },
+            /**
+             * Stream height
+             *
+             * @returns {number}
+             */
             streamHeight() {
                 if (this.streamsArray.length > 4) {
 //counting logic
                 } else return this.heightDefault;
             }
         },
+        mounted() {
+            $(document).on('click', '.dropdown-menu, .remove', function (e) {
+                e.stopPropagation();
+            });
+        },
         methods: {
+            /**
+             * Set default settings
+             *
+             * @returns {void}
+             */
+            setDefaultSettings() {
+                this.settings.autoplay = false;
+                this.settings.chat = false;
+                this.settings.mute = false;
+            },
+
+            /**
+             * Set stream array with data from toolbar component
+             *
+             * @returns {void}
+             */
             setStreamArray(streamArray) {
                 this.showHello = false;
                 this.showToolbar = false;
-                this.setDefaultSettings();
-                this.streamsArray = streamArray.streams;
+                this.cleanHomePage();
+
                 for(let index in streamArray.settings) {
                     let key = streamArray.settings[index];
                     this.settings[key] = true;
                 }
             },
-            setDefaultSettings() {
-                this.settings.autoplay = false;
-                this.settings.chat = false;
-                this.settings.mute = false;
+
+            /**
+             * Clean home page from streams and set default settings
+             *
+             * @returns {void}
+             */
+            cleanHomePage() {
+                this.setDefaultSettings();
+                this.streamsArray = [];
             }
         }
     }
 </script>
+
 <style>
     .toolbar {
         width: 300px;
-        background-color: beige;
-        position: absolute;
+        background-color: lightblue;
+        top: 4.5%;
+        text-align: center;
     }
 
     .add-streams {
@@ -105,18 +136,5 @@
     img {
         width: 450px;
         height: 300px;
-    }
-
-    .slide-fade-enter-active {
-        transition: all .3s ease;
-    }
-
-    .slide-fade-leave-active {
-        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-    }
-
-    .slide-fade-enter, .slide-fade-leave-to {
-        transform: translateX(10px);
-        opacity: 0;
     }
 </style>
