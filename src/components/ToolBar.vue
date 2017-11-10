@@ -16,16 +16,8 @@
 
             <div class="form-check">
                 <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" v-model="settingsArray" value="autoplay">
-                    Enable stream autoplay(Twitch)
-                </label>
-                <label class="form-check-label">
                     <input type="checkbox" class="form-check-input" v-model="settingsArray" value="chat">
                     Enable stream chat(Twitch)
-                </label>
-                <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" v-model="settingsArray" value="mute">
-                    Mute stream(Twitch)
                 </label>
             </div>
             <button type="submit" class="btn btn-primary" @click="sendData">SHOW</button>

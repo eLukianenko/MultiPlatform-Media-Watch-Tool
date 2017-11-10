@@ -14,8 +14,6 @@
                     :channel="stream.url"
                     :width="streamWidth"
                     :height="streamHeight"
-                    :autoplay="settings.autoplay"
-                    :muted="settings.mute"
                     :chat="settings.chat"
             ></twitch>
             <youtube v-if="stream.platform =='youtube'"
@@ -84,9 +82,7 @@
              * @returns {void}
              */
             setDefaultSettings() {
-                this.settings.autoplay = false;
                 this.settings.chat = false;
-                this.settings.mute = false;
             },
 
             /**
