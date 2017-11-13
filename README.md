@@ -1,6 +1,9 @@
-# multiplatform
+# Multiplatform
 
-> twitch platform
+> Service which can work with several stream platforms and show streams at the same time
+## Support
+> Twitch<br>
+> Youtube
 
 ## Build Setup
 
@@ -17,5 +20,3 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
