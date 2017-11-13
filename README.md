@@ -2,7 +2,7 @@
 
 > Service which can work with several stream platforms and show streams at the same time
 ## Support
-> Twitch<br>
+> Twitch  
 > Youtube
 
 ## Build Setup
