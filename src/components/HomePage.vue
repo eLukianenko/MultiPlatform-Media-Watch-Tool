@@ -64,7 +64,7 @@
              * @returns {number}
              */
             streamWidth() {
-                if (this.streamsArray.length > 4) {
+                if (this.streamsArray.length > 4 && !this.settings.chat) {
                     return this.widthMin;
                 } else return this.widthDefault;
             },
@@ -74,7 +74,7 @@
              * @returns {number}
              */
             streamHeight() {
-                if (this.streamsArray.length > 4) {
+                if (this.streamsArray.length > 4 && !this.settings.chat) {
                     return this.heightMin;
                 } else return this.heightDefault;
             }

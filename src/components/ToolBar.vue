@@ -20,6 +20,7 @@
                     Enable stream chat(Twitch)
                 </label>
             </div>
+            <button type="submit" class="btn btn-danger" @click="initiateInputFields">CLEAR</button>
             <button type="submit" class="btn btn-primary" @click="sendData">SHOW</button>
         </form>
     </div>
@@ -30,23 +31,13 @@
         name: 'ToolBar',
         data() {
             return {
-                inputStreamsArray: [
-                    {
-                        url:''
-                    },
-                    {
-                        url:''
-                    },
-                    {
-                        url:''
-                    },
-                    {
-                        url:''
-                    }
-                    ],
+                inputStreamsArray: [],
                 streamsArray: [],
                 settingsArray: []
             }
+        },
+        mounted(){
+            this.initiateInputFields()
         },
         methods: {
             /**
@@ -78,7 +69,16 @@
              * Add new input field to form
              */
             addField() {
-                this.inputStreamsArray.push({value: ''});
+                this.inputStreamsArray.push({url: ''});
+            },
+            /**
+             * Initiate input fields
+             */
+            initiateInputFields() {
+                this.inputStreamsArray=[];
+                for(let i=0; i<4; i++){
+                    this.inputStreamsArray.push({url:''})
+                }
             }
         }
     }
