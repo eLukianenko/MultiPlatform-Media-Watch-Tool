@@ -2,7 +2,7 @@
 
 > Service which can work with several stream platforms and show streams at the same time
 ## Support
-> Twitch<br>
+> Twitch  
 > Youtube
 
 ## Build Setup
@@ -20,3 +20,5 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
+### Author: Evgeny Lukyanenko  
+For any questions: xadjek@gmail.com
