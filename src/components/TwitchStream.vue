@@ -17,3 +17,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+  #twitch-embed iframe {
+    float:left;
+  }
+</style>

@@ -18,7 +18,6 @@
             <img src="../assets/YouTubeTwitch.jpg">
             <h1>Welcome to Multiplatform stream view service!</h1>
         </div>
-
         <div v-for="stream in streamsArray">
             <twitch v-if="stream.platform =='twitch'"
                     :channel="stream.url"
@@ -133,6 +132,7 @@
     .title{
         padding-top: 15px;
         padding-bottom: 15px;
+        padding-right: 130px;
         font-size: large;
     }
     .toolbar {
