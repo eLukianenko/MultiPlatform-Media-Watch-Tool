@@ -19,7 +19,6 @@ export default {
 
 <style scoped>
   iframe {
-        margin-left: 100px;
         float:left;
   }
 </style>

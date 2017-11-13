@@ -25,6 +25,8 @@
                     :height="streamHeight"
                     :chat="settings.chat"
             ></twitch>
+        </div>
+        <div v-for="stream in streamsArray" class="youtube">
             <youtube v-if="stream.platform =='youtube'"
                      :channel="stream.url"
                      :width="streamWidth"
@@ -143,5 +145,8 @@
     img {
         width: 450px;
         height: 300px;
+    }
+    .youtube {
+        margin-left: 9%;
     }
 </style>
