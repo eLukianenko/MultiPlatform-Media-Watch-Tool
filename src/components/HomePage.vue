@@ -1,14 +1,24 @@
 <template>
     <div>
-        <toolbar class="toolbar dropdown-menu" @setStreamData="setStreamArray"></toolbar>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ADD STREAMS <span class="caret"></span></a>
+                            <toolbar class="toolbar dropdown-menu" @setStreamData="setStreamArray"></toolbar>
+                        </li>
+                    </ul>
+                    <div class="title">MULTIPLATFORM</div>
+                </div>
+            </div>
+        </nav>
+
         <div v-if="showHello">
             <img src="../assets/YouTubeTwitch.jpg">
-            <h2>Welcome to Multiplatform stream view service!</h2>
-            <h4>Please add stream urls in toolbar!</h4>
+            <h1>Welcome to Multiplatform stream view service!</h1>
         </div>
-        <button class="btn btn-primary add-streams dropdown-toggle" data-toggle="dropdown">
-            ADD STREAMS <span class="caret"></span>
-        </button>
+
         <div v-for="stream in streamsArray">
             <twitch v-if="stream.platform =='twitch'"
                     :channel="stream.url"
@@ -39,9 +49,9 @@
         },
         data() {
             return {
-                widthMin: 340,
+                widthMin: 580,
                 widthDefault: 780,
-                heightMin: 400,
+                heightMin: 440,
                 heightDefault: 480,
                 streamsArray: [],
                 settings: {},
@@ -56,7 +66,7 @@
              */
             streamWidth() {
                 if (this.streamsArray.length > 4) {
-//counting logic
+                    return this.widthMin;
                 } else return this.widthDefault;
             },
             /**
@@ -66,7 +76,7 @@
              */
             streamHeight() {
                 if (this.streamsArray.length > 4) {
-//counting logic
+                    return this.heightMin;
                 } else return this.heightDefault;
             }
         },
@@ -116,20 +126,20 @@
     }
 </script>
 
-<style>
+<style scoped>
+    h1 {
+        color:darkslategray;
+    }
+    .title{
+        padding-top: 15px;
+        padding-bottom: 15px;
+        font-size: large;
+    }
     .toolbar {
         width: 400px;
         background-color: lightblue;
-        top: 4.5%;
         text-align: center;
     }
-
-    .add-streams {
-        position: absolute;
-        top: 1%;
-        left: 8.5%;
-    }
-
     img {
         width: 450px;
         height: 300px;
