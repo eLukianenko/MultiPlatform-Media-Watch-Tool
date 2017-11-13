@@ -75,9 +75,9 @@
              * Initiate input fields
              */
             initiateInputFields() {
-                this.inputStreamsArray=[];
-                for(let i=0; i<4; i++){
-                    this.inputStreamsArray.push({url:''})
+                this.inputStreamsArray = [];
+                for(let i=0; i<4; i++) {
+                    this.addField();
                 }
             }
         }
