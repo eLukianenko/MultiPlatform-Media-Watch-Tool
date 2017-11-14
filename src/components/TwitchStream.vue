@@ -1,5 +1,5 @@
 <template>
-  <div id="twitch-embed"></div>
+    <div id="twitch-embed"></div>
 </template>
 
 <script>
@@ -20,6 +20,6 @@ export default {
 
 <style scoped>
   #twitch-embed iframe {
-    float:left;
+    float: left;
   }
 </style>

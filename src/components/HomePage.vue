@@ -4,9 +4,9 @@
             <div class="container-fluid">
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="dropdown">
+                        <li class="dropdown" :class="toggleClass" @click.stop="toggle">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ADD STREAMS <span class="caret"></span></a>
-                            <toolbar class="toolbar dropdown-menu" @setStreamData="setStreamArray"></toolbar>
+                            <toolbar @setStreamData="setStreamArray"></toolbar>
                         </li>
                     </ul>
                     <div class="title">MULTIPLATFORM</div>
@@ -19,7 +19,7 @@
             <h1>Welcome to Multiplatform stream view service!</h1>
         </div>
         <div v-for="stream in streamsArray">
-            <twitch v-if="stream.platform =='twitch'"
+            <twitch v-if="stream.platform == 'twitch'"
                     :channel="stream.url"
                     :width="streamWidth"
                     :height="streamHeight"
@@ -27,7 +27,7 @@
             ></twitch>
         </div>
         <div v-for="stream in streamsArray" class="youtube">
-            <youtube v-if="stream.platform =='youtube'"
+            <youtube v-if="stream.platform == 'youtube'"
                      :channel="stream.url"
                      :width="streamWidth"
                      :height="streamHeight"
@@ -37,16 +37,16 @@
 </template>
 
 <script>
-    import TwitchStream from './TwitchStream'
-    import YoutubeStream from './YoutubeStream'
+    import Twitch from './TwitchStream'
+    import Youtube from './YoutubeStream'
     import Toolbar from './ToolBar'
 
     export default {
         name: 'HomePage',
         components: {
-            'twitch': TwitchStream,
-            'youtube': YoutubeStream,
-            'toolbar': Toolbar
+            Twitch,
+            Youtube,
+            Toolbar
         },
         data() {
             return {
@@ -57,7 +57,11 @@
                 streamsArray: [],
                 settings: {},
                 showHello: true,
+                show: false
             }
+        },
+        mounted() {
+            document.addEventListener('click', () => this.show = false)
         },
         computed: {
             /**
@@ -66,9 +70,9 @@
              * @returns {number}
              */
             streamWidth() {
-                if (this.streamsArray.length > 4 && !this.settings.chat) {
-                    return this.widthMin;
-                } else return this.widthDefault;
+                return (this.streamsArray.length > 4 && !this.settings.chat)
+                  ? this.widthMin
+                  : this.widthDefault;
             },
             /**
              * Stream height
@@ -76,17 +80,31 @@
              * @returns {number}
              */
             streamHeight() {
-                if (this.streamsArray.length > 4 && !this.settings.chat) {
-                    return this.heightMin;
-                } else return this.heightDefault;
+                return (this.streamsArray.length > 4 && !this.settings.chat)
+                    ? this.heightMin
+                    : this.heightDefault;
+            },
+            /**
+             * Toggle class
+             *
+             * @returns {boolean}
+            */
+            toggleClass() {
+                return {
+                    open: this.show
+                }
             }
         },
-        mounted() {
-            $(document).on('click', '.dropdown-menu, .remove', function (e) {
-                e.stopPropagation();
-            });
-        },
         methods: {
+            /**
+             * Toggle show/hide mehu
+             *
+             * @returns {void}
+             */
+            toggle() {
+                this.show = !this.show;
+            },
+
             /**
              * Set default settings
              *
@@ -105,7 +123,7 @@
                 this.showHello = false;
                 this.streamsArray = [];
                 this.setDefaultSettings();
-                $('[data-toggle="dropdown"]').parent().removeClass('open');
+                this.toggle();
             },
 
             /**
@@ -115,13 +133,9 @@
              */
             setStreamArray(streamArray) {
                 this.cleanHomePage();
-                this.$nextTick(function () {
-                    this.streamsArray = streamArray.streams;
-                });
-                for(let index in streamArray.settings) {
-                    let key = streamArray.settings[index];
-                    this.settings[key] = true;
-                }
+                this.$nextTick(() => this.streamsArray = streamArray.streams);
+
+                streamArray.settings.forEach((item, i, arr) => this.settings[item] = true);
             }
         }
     }
@@ -129,18 +143,13 @@
 
 <style scoped>
     h1 {
-        color:darkslategray;
+        color: darkslategray;
     }
-    .title{
+    .title {
         padding-top: 15px;
         padding-bottom: 15px;
         padding-right: 130px;
         font-size: large;
-    }
-    .toolbar {
-        width: 400px;
-        background-color: lightblue;
-        text-align: center;
     }
     img {
         width: 450px;
