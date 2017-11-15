@@ -11,7 +11,7 @@ export default {
     props: ['channel', 'width', 'height'],
     computed: {
         streamSRC() {
-            return "https://youtube.com/embed/" + this.channel;
+            return `https://youtube.com/embed/${this.channel}`;
         }
     }
 }
@@ -19,6 +19,6 @@ export default {
 
 <style scoped>
   iframe {
-        float:left;
+        float: left;
   }
 </style>

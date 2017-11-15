@@ -1,15 +1,19 @@
 <template>
-    <div>
+    <div class="toolbar dropdown-menu" @click.stop>
         <form>
-            <H4>Streams <button class="btn btn-success add-more" type="button" @click="addField"><span
-                    class="glyphicon glyphicon-plus"></span></button>
-            </H4>
+            <h4>Streams
+                <button class="btn btn-success add-more" type="button" @click="addField">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </h4>
+
             <div v-for="(stream, index) in inputStreamsArray">
                 <div class="input-group control-group">
                     <input type="url" class="form-control" placeholder="Stream url" v-model="stream.url">
                     <div class="input-group-btn">
-                        <button class="btn btn-danger remove" type="button" @click="inputStreamsArray.splice(index, 1)"><span
-                                class="glyphicon glyphicon-minus"></span></button>
+                        <button class="btn btn-danger remove" type="button" @click.stop="inputStreamsArray.splice(index, 1)">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -19,8 +23,8 @@
                     Enable stream chat(Twitch)
                 </label>
             </div>
-            <button type="submit" class="btn btn-danger" @click="initiateInputFields">CLEAR</button>
-            <button type="submit" class="btn btn-primary" @click="sendData">SHOW</button>
+            <button class="btn btn-danger" @click="initiateInputFields">CLEAR</button>
+            <button class="btn btn-primary" @click="sendData">SHOW</button>
         </form>
     </div>
 </template>
@@ -32,10 +36,11 @@
             return {
                 inputStreamsArray: [],
                 streamsArray: [],
-                settingsArray: []
+                settingsArray: [],
+                countFields: 4
             }
         },
-        mounted(){
+        mounted() {
             this.initiateInputFields()
         },
         methods: {
@@ -46,7 +51,7 @@
                 let vm = this;
                 this.streamsArray = [];
 
-                this.inputStreamsArray.forEach(function (item) {
+                this.inputStreamsArray.forEach((item) => {
                     let url = '';
                     let platform = '';
                     let dataUrl = item.url;
@@ -75,7 +80,7 @@
              */
             initiateInputFields() {
                 this.inputStreamsArray = [];
-                for(let i=0; i<4; i++) {
+                for(let i = 0; i < this.countFields; i++) {
                     this.addField();
                 }
             }
@@ -84,6 +89,11 @@
 </script>
 
 <style>
+    .toolbar {
+        width: 400px;
+        background-color: lightblue;
+        text-align: center;
+    }
     .input-group {
         width: 90%;
         margin-left: 5%;
