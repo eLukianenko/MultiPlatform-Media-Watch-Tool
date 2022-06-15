@@ -2,7 +2,7 @@
   "name": "multiplatform",
   "version": "1.0.0",
   "description": "twitch platform",
-  "author": "evgenyl <evgenyl@bl3ndlabs.com>",
+  "author": "",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
